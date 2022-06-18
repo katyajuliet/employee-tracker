@@ -1,9 +1,10 @@
+//requirements for starting command line with connection.js
 const inquirer = require('inquirer');
 const db = require('./config/connection');
 const cTable = require('console.table');
-
+//connecting roles functionality with server.js
 const {viewDepts, viewRoles, viewEmps, addDept, addRole, addEmp, updateEmpRole} = require('./roles.js'); 
-
+//inquiries for command line - prompts
 const promptMenu = () => {
     return inquirer
         .prompt([
