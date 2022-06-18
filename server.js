@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 const db = require('./config/connection');
 const cTable = require('console.table');
 
-const {viewDepts, viewRoles, viewEmps, addDept, addRole, addEmp, updateEmpRole} = require('./validate.js'); 
+const {viewDepts, viewRoles, viewEmps, addDept, addRole, addEmp, updateEmpRole} = require('./roles.js'); 
 
 const promptMenu = () => {
     return inquirer
