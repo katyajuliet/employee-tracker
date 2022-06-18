@@ -1,3 +1,4 @@
+//requirements
 const inquirer = require("inquirer");
 const connection = require("./config/connection");
 
@@ -22,7 +23,7 @@ const getRoles = () => {
   return roleArr;
 };
 roleArr = getRoles();
-
+//view departments array in table
 const getDepts = () => {
   const depts = `SELECT name, id FROM department;`;
   connection.query(depts, (err, rows) => {
@@ -39,7 +40,7 @@ const getDepts = () => {
   return deptArr;
 };
 deptArr = getDepts();
-
+//view employee list table
 const getEmps = () => {
   const sql = "SELECT first_name, last_name FROM employee;";
   connection.query(sql, (err, rows) => {
@@ -55,7 +56,7 @@ const getEmps = () => {
   return empArr;
 };
 empArr = getEmps();
-
+//view managers list table
 const getManagers = () => {
   const query = `SELECT first_name, last_name FROM employee WHERE manager_id IS NULL`;
   connection.query(query, (err, res) => {
@@ -80,7 +81,7 @@ const viewDepts = () => {
     console.table(rows);
   });
 };
-
+//view roles in database
 const viewRoles = () => {
   const query = `SELECT * FROM role`;
 
@@ -104,7 +105,7 @@ const viewEmps = () => {
     console.table(rows);
   });
 };
-
+//add department from department list
 const addDept = () => {
   inquirer
     .prompt([
@@ -138,7 +139,7 @@ const addDept = () => {
       });
     });
 };
-//add role with inquirer prompt
+//add role with inquirer prompt and salary associated
 const addRole = () => {
   inquirer
     .prompt([
@@ -148,7 +149,7 @@ const addRole = () => {
         message: "What is the title of the new role?",
         validate: (nameInput) => {
           if (!nameInput) {
-            console.log("Please enter a title!");
+            console.log("Title of role is required.");
             return false;
           }
           return true;
@@ -198,7 +199,7 @@ const addRole = () => {
       });
     });
 };
-
+//add new employee by name with role, manager, department and salary
 const addEmp = () => {
   inquirer
     .prompt([
@@ -269,7 +270,7 @@ const addEmp = () => {
         });
     });
 };
-
+//update employee role 
 const updateEmpRole = () => {
   inquirer
     .prompt([
@@ -312,43 +313,7 @@ const updateEmpRole = () => {
     });
 };
 
-// Delete a Department
-const removeDepartment = () => {
-  // let sql =   `SELECT department.id, department.department_name FROM department`;
-  // connection.promise().query(sql, (error, response) => {
-  //   if (error) throw error;
-  //   let departmentNamesArray = [];
-  //   response.forEach((department) => {departmentNamesArray.push(department.department_name);});
-
-  inquirer
-    .prompt([
-      {
-        name: "chosenDept",
-        type: "list",
-        message: "Which department would you like to delete?",
-        choices: departmentNamesArray,
-      },
-    ])
-    .then((answer) => {
-      let departmentId;
-
-      response.forEach((department) => {
-        if (answer.chosenDept === department.department_name) {
-          departmentId = department.id;
-        }
-      });
-
-      //   let sql =     `DELETE FROM department WHERE department.id = ?`;
-      //   connection.promise().query(sql, [departmentId], (error) => {
-      //     if (error) throw error;
-      return;
-
-      // viewAllDepartments();
-      //   });
-      // });
-    });
-};
-
+//export module by name
 module.exports = {
   viewDepts,
   viewRoles,
@@ -356,6 +321,5 @@ module.exports = {
   addDept,
   addRole,
   addEmp,
-  updateEmpRole,
-  removeDepartment,
+  updateEmpRole
 };

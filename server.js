@@ -3,16 +3,16 @@ const inquirer = require('inquirer');
 const connection = require('./config/connection');
 const cTable = require('console.table');
 //connecting roles functionality with server.js
-const {viewDepts, viewRoles, viewEmps, addDept, addRole, addEmp, updateEmpRole, removeDepartment} = require('./roles.js'); 
+const {viewDepts, viewRoles, viewEmps, addDept, addRole, addEmp, updateEmpRole} = require('./roles.js'); 
+
 
 //inquiries for command line - prompts
-const promptMenu = () => {
-    return inquirer
-        .prompt([
+const promptUser = () => {
+    inquirer.prompt([
             {
                 type: 'list',
                 name: 'menu',
-                message: 'What would you like to do?',
+                message: 'To get started, choose an option below.',
                 choices: [
                     'View All Departments',
                     'View All Roles',
@@ -20,8 +20,7 @@ const promptMenu = () => {
                     'Add a Department',
                     'Add a Role',
                     'Add an Employee',
-                    'Update an Employee Role',
-                    'Delete a Department'
+                    'Update an Employee Role'
                 ]
             }
         ])
@@ -48,10 +47,9 @@ const promptMenu = () => {
                 case 'Update an Employee Role':
                     updateEmpRole();
                     break;
-                case 'Delete a Department':
-                    removeDepartment ();
-                    break;
+
             }
         })
 };
-promptMenu();
+
+promptUser();
