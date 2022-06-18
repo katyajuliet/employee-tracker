@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const db = require('./config/connection');
+const connection = require('./config/connection');
 
 //roles for inquirer
 var roleArr = [];
