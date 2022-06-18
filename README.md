@@ -18,6 +18,7 @@ for installing the dependencies from package.json
 
 #### Command Line Screen Shot
 ![screenshot](./assets/Screenshot.png)
+![screenshot](./assets/Screenshot2.png)
 
 ##### Video Demonstration on command line and functionality
 [Video Demo Link] ()
