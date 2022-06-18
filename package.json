@@ -4,6 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "seed": "mysql db/company.db < db/seeds.sql",
+    "db": "mysql db/employees.db",
+    "watch": "nodemon server.js",
     "start": "node server.js",
     "test": "jest"
   },
