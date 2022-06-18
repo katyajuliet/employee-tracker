@@ -1,10 +1,16 @@
-const mysql = require('mysql');
-const chalk = require('chalk');
 
-connection = mysql.createConnection({
-    host: 'localhost',
-    port: 3306,
-    user: 'root',
-    password: '',
-    database: 'employee_db',
-});
+const mysql = require('mysql2');
+
+require('dotenv').config();
+
+const db = mysql.createConnection(
+    {   
+        host: 'localhost',
+        port: 3306,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME},
+        console.log("Successful connection")
+);
+
+module.exports = db;
