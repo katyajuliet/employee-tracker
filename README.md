@@ -10,15 +10,15 @@ run
 ```
 npm i
 ```
-for installing the dependencies from package.json
+for installing the dependencies from package.json <br>
 [Inquirer](https://www.npmjs.com/package/inquirer) <br>
 [mysql2](https://www.npmjs.com/package/mysql2) <br>
 [console.table](https://www.npmjs.com/package/console.table) <br>
 [dotenv](https://www.npmjs.com/package/dotenv) 
 
 #### Command Line Screen Shot
-![screenshot](./assets/Screenshot.png)
-![screenshot](./assets/Screenshot2.png)
+![screenshot](./assets/screenshot.png)
+![screenshot](./assets/screenshot2.png)
 
 ##### Video Demonstration on command line and functionality
 [Video Demo Link] ()

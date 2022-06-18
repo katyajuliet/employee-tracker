@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Build a command-line application from scratch to manage a company's employee database, using Node.js, Inquirer, and MySQL.",
   "scripts": {
-    "seed": "mysql db/company.db < db/seeds.sql",
     "db": "mysql db/employees.db",
     "watch": "nodemon server.js",
     "start": "node server.js",
