@@ -10,7 +10,7 @@ var managerArr = [];
 //fill function to get and run roles
 const getRoles = () => {
     const roles = `SELECT title FROM role;`;
-    db.query(roles, (err, rows) => {
+    connection.query(roles, (err, rows) => {
         if (err) {
             console.log(err);
             return;
@@ -25,7 +25,7 @@ roleArr = getRoles();
 
 const getDepts = () => {
     const depts = `SELECT name, id FROM department;`;
-    db.query(depts, (err, rows) => {
+    connection.query(depts, (err, rows) => {
         if (err) {
             console.log(err);
             return;
@@ -42,7 +42,7 @@ deptArr = getDepts();
 
 const getEmps = () => {
     const sql = 'SELECT first_name, last_name FROM employee;';
-    db.query(sql, (err, rows) => {
+    connection.query(sql, (err, rows) => {
         if (err) {
             console.log(err);
             return;
@@ -58,7 +58,7 @@ empArr = getEmps();
 
 const getManagers = () => {
     const query = `SELECT first_name, last_name FROM employee WHERE manager_id IS NULL`;
-    db.query(query, (err, res) => {
+    connection.query(query, (err, res) => {
         if (err) throw err;
         for (var i = 0; i < res.length; i++) {
             managerArr.push(res[i].first_name + " " + res[i].last_name);
@@ -72,7 +72,7 @@ managerArr = getManagers();
 const viewDepts = () => {
     const query = `SELECT * FROM department;`;
 
-    db.query(query, (err, rows) => {
+    connection.query(query, (err, rows) => {
         if (err) {
             console.log(err);
             return;
@@ -85,7 +85,7 @@ const viewDepts = () => {
 const viewRoles = () => {
     const query = `SELECT * FROM role`;
 
-    db.query(query, (err, rows) => {
+    connection.query(query, (err, rows) => {
         if (err) {
             console.log(err);
             return;
@@ -97,7 +97,7 @@ const viewRoles = () => {
 const viewEmps = () => {
     const query = `SELECT * FROM employee`;
 
-    db.query(query, (err, rows) => {
+    connection.query(query, (err, rows) => {
         if (err) {
             console.log(err);
             return;
@@ -120,7 +120,7 @@ const addDept = () => {
         const query1 = `INSERT INTO department (name) VALUES ('${newName}');`;
         const query2 = `SELECT * FROM department;`;
 
-        db.query(query1, (err) => {
+        connection.query(query1, (err) => {
             if (err) {
                 console.log(err);
                 return;
@@ -128,7 +128,7 @@ const addDept = () => {
             console.log('Successfully added new Department. Updated list:');
         });
 
-        db.query(query2, (err, rows) => {
+        connection.query(query2, (err, rows) => {
             if (err) {
                 console.log(err);
                 return;
@@ -176,7 +176,7 @@ const addRole = () => {
         roleArr.push(title);
 
         const query = `INSERT INTO role (title, salary, department_id) VALUES ('${title}', ${salary}, (SELECT id FROM department WHERE name='${department_name}'));`;
-        db.query(query, (err) => {
+        connection.query(query, (err) => {
             if (err) {
                 console.log(err);
                 console.log("Failed! Current list: ")
@@ -186,7 +186,7 @@ const addRole = () => {
         });
 
         const query2 = `SELECT * FROM role;`;
-        db.query(query2, (err, rows) => {
+        connection.query(query2, (err, rows) => {
             if (err) {
                 console.log(err);
                 return;
@@ -245,13 +245,13 @@ const addEmp = () => {
         var empName = empInfo.first_name + " " + empInfo.last_name;
         empArr.push(empName);
 
-        db.promise().query(sql).then((rows) => {
+        connection.promise().query(sql).then((rows) => {
             const manager_id = rows[0][0].id;
             return manager_id;
         })
         .then(manager_id => {
             const sql2 = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ('${first_name}', '${last_name}', (SELECT id FROM role WHERE title='${role}'), ${manager_id});`;
-            db.query(sql2, (err) => {
+            connection.query(sql2, (err) => {
                 if (err) {
                     console.log(err);
                     return;
@@ -282,7 +282,7 @@ const updateEmpRole = () => {
         const emp_last_name = employeeName.split(' ')[1];
 
         const query = `UPDATE employee SET role_id = (SELECT id FROM role WHERE title='${newRole}') WHERE first_name='${emp_first_name}' AND last_name='${emp_last_name}';`;
-        db.query(query, (err) => {
+        connection.query(query, (err) => {
             if (err) {
                 console.log(err);
                 console.log("Error: Current list: ")
@@ -292,7 +292,7 @@ const updateEmpRole = () => {
         });
 
         const query2 = `SELECT * FROM employee;`;
-        db.query(query2, (err, rows) => {
+        connection.query(query2, (err, rows) => {
             if (err) {
                 console.log(err);
                 return;
