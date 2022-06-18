@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 const connection = require('./config/connection');
 const cTable = require('console.table');
 //connecting roles functionality with server.js
-const {viewDepts, viewRoles, viewEmps, addDept, addRole, addEmp, updateEmpRole} = require('./roles.js'); 
+const {viewDepts, viewRoles, viewEmps, addDept, addRole, addEmp, updateEmpRole, removeDepartment} = require('./roles.js'); 
 
 //inquiries for command line - prompts
 const promptMenu = () => {
@@ -20,7 +20,8 @@ const promptMenu = () => {
                     'Add a Department',
                     'Add a Role',
                     'Add an Employee',
-                    'Update an Employee Role'
+                    'Update an Employee Role',
+                    'Delete a Department'
                 ]
             }
         ])
@@ -46,6 +47,9 @@ const promptMenu = () => {
                     break;
                 case 'Update an Employee Role':
                     updateEmpRole();
+                    break;
+                case 'Delete a Department':
+                    removeDepartment ();
                     break;
             }
         })

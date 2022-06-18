@@ -302,4 +302,40 @@ const updateEmpRole = () => {
     })
 };
 
-module.exports = {viewDepts, viewRoles, viewEmps, addDept, addRole, addEmp, updateEmpRole};
+// Delete a Department
+const removeDepartment = () => {
+    let sql =   `SELECT department.id, department.department_name FROM department`;
+    connection.promise().query(sql, (error, response) => {
+      if (error) throw error;
+      let departmentNamesArray = [];
+      response.forEach((department) => {departmentNamesArray.push(department.department_name);});
+
+      inquirer
+        .prompt([
+          {
+            name: 'chosenDept',
+            type: 'list',
+            message: 'Which department would you like to delete?',
+            choices: departmentNamesArray
+          }
+        ])
+        .then((answer) => {
+          let departmentId;
+
+          response.forEach((department) => {
+            if (answer.chosenDept === department.department_name) {
+              departmentId = department.id;
+            }
+          });
+
+          let sql =     `DELETE FROM department WHERE department.id = ?`;
+          connection.promise().query(sql, [departmentId], (error) => {
+            if (error) throw error;
+
+            viewAllDepartments();
+          });
+        });
+    });
+};
+
+module.exports = {viewDepts, viewRoles, viewEmps, addDept, addRole, addEmp, updateEmpRole, removeDepartment};
