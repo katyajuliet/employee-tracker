@@ -18,7 +18,7 @@ Required <br>
 
 
 #### Video Demonstration on command line and functionality
-[Video Demo Link] ()
+[Video Demo Link] (https://www.loom.com/share/61583a169a1e4f6da34b2d28d73571b6)
 
 ##### Command Line Screen Shot
 ![screenshot](./assets/screenshot.png)
